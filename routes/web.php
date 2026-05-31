@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\InvoiceController;
 use Illuminate\Support\Facades\Route;
 
 // Rute Utama otomatis redirect ke Login
@@ -26,6 +27,8 @@ Route::middleware('auth')->group(function () {
 
      // staff area (bisa akses customers & invoices)
     Route::resource('customers', CustomerController::class);
+    Route::resource('invoices', InvoiceController::class)->only(['index', 'create', 'store']);
+    Route::patch('invoices/{invoice}/pay', [InvoiceController::class, 'pay'])->name('invoices.pay');
 });
 
 
