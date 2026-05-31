@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 // Rute Utama otomatis redirect ke Login
@@ -22,6 +23,9 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:administrator')->group(function () {
         Route::resource('users', UserController::class);
     });
+
+     // staff area (bisa akses customers & invoices)
+    Route::resource('customers', CustomerController::class);
 });
 
 
